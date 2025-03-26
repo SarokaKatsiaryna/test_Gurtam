@@ -1,9 +1,13 @@
+import logging
 from datetime import timedelta
 from django.utils import timezone
 from django.db import models
-from django.core.validators import MinValueValidator, MaxValueValidator
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_delete, pre_save
 from django.dispatch import receiver
+from django.core.validators import MinValueValidator, MaxValueValidator
+
+
+logger = logging.getLogger(__name__)
 
 
 class LinksGroup(models.Model):
@@ -39,3 +43,25 @@ def log_link_changes(sender, instance, **kwargs):
         instance.created_at = timezone.now()
     if instance.deleted_at is None:
         instance.deleted_at = instance.created_at + timedelta(days=int(instance.time_to_live))
+    if instance.pk is None:
+        logger.info(f"Created new link: URL={instance.long_url}: {instance.short_url}")
+    else:
+        logger.info(f"Updated link: URL={instance.long_url}: {instance.short_url}")
+
+
+@receiver(pre_save, sender=LinksGroup)
+def log_link_group_changes(sender, instance, **kwargs):
+    if instance.pk is None:
+        logger.info(f"Created new link group: name={instance.name}")
+    else:
+        logger.info(f"Updated link group: name={instance.name}")
+
+
+@receiver(pre_delete, sender=Link)
+def log_link_deletion(sender, instance, **kwargs):
+    logger.info(f"Link deleted: URL={instance.long_url}: {instance.short_url}")
+
+
+@receiver(pre_delete, sender=LinksGroup)
+def log_link_group_deletion(sender, instance, **kwargs):
+    logger.info(f"Link group deleted: name={instance.name}")
