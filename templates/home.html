@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>URL-shortener</title>
+</head>
+<body>
+    <div style="display: flex;
+               align-items: center;
+               flex-direction: column;
+               margin-top: 100px">
+        <form id="contact-form" action="" novalidate method="post">
+            {% csrf_token %}
+            <div>
+                {% for input in form %}
+                    <div style="display: flex;
+                                justify-content: center;
+                                flex-direction: column;
+                                margin: 20px">
+                        <label style="margin: 20px">{{ input.label }}</label>
+                        {% if input.errors %}
+                            <br>
+                            <label style="color: #CC3434" >
+                                {{ input.errors }}
+                            </label>
+                        {% endif %}
+                        <div style="margin: 10px">
+                            {{ input }}
+                        </div>
+                    </div>
+                {% endfor %}
+                <div style="display: flex;
+                            justify-content: center;
+                            margin-bottom: 10px">
+                    <button type="submit" id="form-submit" class="orange-button">
+                        Generate link
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    {% if short_url %}
+        <div style="display: flex;
+                    align-items: center;
+                    flex-direction: column;
+                    margin-top: 100px">
+            <p>Your link is: <a href="{{ long_url }}">{{ long_url }}</a> </p>
+            <p>Your short link is: <a href="{{ short_url }}">https://localhost:8000/{{ short_url }}</a></p>
+        </div>
+    {% endif %}
+</body>
+</html>
