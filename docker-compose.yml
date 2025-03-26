@@ -1,0 +1,35 @@
+services:
+  postgres-db:
+    image: postgres:latest
+    container_name: postgres-db
+    env_file:
+      - docker/.env
+    ports:
+      - "5433:5432"
+
+  django:
+    build:
+      context: .
+    container_name: test_gurtam
+    depends_on:
+      - postgres-db
+    ports:
+      - "8080:8000"
+    env_file:
+      - docker/.env
+    volumes:
+      - static_volume:/test_gurtam/static
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - ./conf/nginx.conf:/etc/nginx/nginx.conf
+      - static_volume:/usr/share/nginx/html/static
+    ports:
+      - "80:80"
+    depends_on:
+      - django
+
+volumes:
+  static_volume:
