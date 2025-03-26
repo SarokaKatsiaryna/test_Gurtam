@@ -33,7 +33,7 @@
                             justify-content: center;
                             margin-bottom: 10px">
                     <button type="submit" id="form-submit" class="orange-button">
-                        Send Message
+                        Generate link
                     </button>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                     flex-direction: column;
                     margin-top: 100px">
             <p>Your link is: <a href="{{ long_url }}">{{ long_url }}</a> </p>
-            <p>Your short link is: <a href="{{ short_url }}">127.0.0.1:8000/{{ short_url }}</a></p>
+            <p>Your short link is: <a href="{{ short_url }}">https://localhost:8000/{{ short_url }}</a></p>
         </div>
     {% endif %}
 </body>
