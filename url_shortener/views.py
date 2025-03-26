@@ -1,3 +1,4 @@
+import logging
 from django.utils import timezone
 from nanoid import generate
 from django.shortcuts import render, redirect
@@ -5,6 +6,9 @@ from django.db.models import Q
 from django.views.generic import CreateView
 from url_shortener.forms import LinkForm
 from url_shortener.models import Link
+
+
+logger_app = logging.getLogger(__name__)
 
 
 class HomeView(CreateView):
@@ -30,6 +34,7 @@ class HomeView(CreateView):
                     while Link.objects.get(
                         short_url=short_url
                     ):  # Checking the existence of the short link in the database
+                        logger_app.warning(f"Short URL {short_url} already exists")
                         short_url = generate(size=4)
                 except Link.DoesNotExist:
                     form_save.short_url = short_url
