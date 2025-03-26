@@ -1,0 +1,1 @@
+0 0 * * * root /usr/local/bin/python manage.py cron >> /var/log/cron.log 2>&1
