@@ -27,6 +27,30 @@ git clone https://github.com/SarokaKatsiaryna/test_Gurtam.git
 cd test_Gurtam
 ```
 
+Add files
+```.env
+SECRET_KEY='django-insecure-fxdr+kddw7%$s#!ax)ww=gpn3#a$$rnf9&_4va-3ne8auz3igt'
+DEBUG='True'
+POSTGRES_DB="<you_name_database>"
+POSTGRES_USER="<your username>"
+POSTGRES_PASSWORD="<your password>"
+POSTGRES_HOST="localhost"
+POSTGRES_PORT="5432"
+```
+
+```docker/.env
+SECRET_KEY='django-insecure-fxdr+kddw7%$s#!ax)ww=gpn3#a$$rnf9&_4va-3ne8auz3igt'
+DEBUG='False'
+POSTGRES_DB="<you_name_database>"
+POSTGRES_USER="<your username>"
+POSTGRES_PASSWORD="<your password>"
+POSTGRES_HOST="postgres-db"
+POSTGRES_PORT="5432"
+DJANGO_SUPERUSER_USERNAME="<your username>"
+DJANGO_SUPERUSER_EMAIL="<your email>"
+DJANGO_SUPERUSER_PASSWORD="<your password>"
+```
+
 ### 🔹 2. Launch via Docker
 
 ```bash
