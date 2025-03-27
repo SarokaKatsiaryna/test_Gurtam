@@ -28,7 +28,8 @@ cd test_Gurtam
 ```
 
 Add files
-```.env
+.env
+```bash
 SECRET_KEY='django-insecure-fxdr+kddw7%$s#!ax)ww=gpn3#a$$rnf9&_4va-3ne8auz3igt'
 DEBUG='True'
 POSTGRES_DB="<you_name_database>"
@@ -37,8 +38,8 @@ POSTGRES_PASSWORD="<your password>"
 POSTGRES_HOST="localhost"
 POSTGRES_PORT="5432"
 ```
-
-```docker/.env
+docker/.env
+```bash
 SECRET_KEY='django-insecure-fxdr+kddw7%$s#!ax)ww=gpn3#a$$rnf9&_4va-3ne8auz3igt'
 DEBUG='False'
 POSTGRES_DB="<you_name_database>"
